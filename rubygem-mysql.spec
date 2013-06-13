@@ -2,8 +2,11 @@
 %global gem_name mysql
 %if 0%{?rhel} <= 6 && 0%{?fedora} <= 16
 %global gem_dir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
+%global gem_dir_i386 %(ruby -rubygems -e 'puts Gem::dir.sub("lib64","lib")' 2>/dev/null)
 %global gem_instdir %{gem_dir}/gems/%{gem_name}-%{version}
+%global gem_instdir_i386 %{gem_dir_i386}/gems/%{gem_name}-%{version}
 %global gem_docdir %{gem_dir}/doc/%{gem_name}-%{version}
+%global gem_docdir_i386 %{gem_dir_i386}/doc/%{gem_name}-%{version}
 %global gem_cache %{gem_dir}/cache
 %global gem_libdir %{gem_instdir}/lib
 %global gem_extdir %{_libdir}/gems/exts/%{gem_name}-%{version}
@@ -83,14 +86,15 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %{gem_spec}
 %{_libdir}/ruby/gems/%{rubyabi}/gems/mysql-%{version}/
 %files doc
-%doc %{gem_docdir}
-%doc %{gem_instdir}/History.txt
-%doc %{gem_instdir}/Manifest.txt
-%doc %{gem_instdir}/README.txt
+%doc %{gem_docdir_i386}
+%doc %{gem_instdir_i386}/History.txt
+%doc %{gem_instdir_i386}/Manifest.txt
+%doc %{gem_instdir_i386}/README.txt
 
 %changelog
 * Fri Jun 07 2013 Sergey Mihailov <sergey.mihailov@gmail.com> - 2.9.1-1
 - Update release
+- add gem_dir_i386 for build noarch doc in arch 64.
 
 * Thu Jun 14 2012 jason - 2.8.1-1
 - Initial package
