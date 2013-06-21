@@ -15,7 +15,8 @@
 
 Summary: This is the MySQL API module for Ruby
 Name: rubygem-%{gem_name}
-Version: 2.9.1
+Epoch: 1
+Version: 2.8.1
 Release: 2%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
@@ -66,11 +67,13 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -a .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-mkdir -p %{buildroot}%{gem_extdir}/lib
+mkdir -p %{buildroot}%{gem_extdir}/lib/%{gem_name}
 # TODO: move the extensions
-##mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir}/lib/
+# mv %{buildroot}%{gem_instdir}/lib/%{gem_name}/mysql_api.so %{buildroot}%{gem_extdir}/lib/%{gem_name}
 
-
+#_mx mkdir -p %{buildroot}%{gem_extdir}/lib/%{gem_name}
+#_mx mv .%{gem_libdir}/json/ext \
+#_mx         %{buildroot}%{gem_extdir}/lib/%{gem_name}
 
 # Remove the binary extension sources and build leftovers.
 rm -rf %{buildroot}%{geminstdir}/ext
@@ -81,7 +84,8 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %{gem_extdir}
 %exclude %{gem_cache}
 %{gem_spec}
-%{_libdir}/ruby/gems/%{rubyabi}/gems/mysql-%{version}/
+#_mx %{_libdir}/ruby/gems/%{rubyabi}/gems/mysql-%{version}/
+/usr/lib/ruby/gems/%{rubyabi}/gems/mysql-%{version}/
 %files doc
 %doc %{gem_docdir}
 %doc %{gem_instdir}/History.txt
@@ -89,8 +93,8 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %doc %{gem_instdir}/README.txt
 
 %changelog
-* Fri Jun 07 2013 Sergey Mihailov <sergey.mihailov@gmail.com> - 2.9.1-2
-- Update release
+* Fri Jun 07 2013 Sergey Mihailov <sergey.mihailov@gmail.com> - 2.8.1-2
+- minor fix
 
 * Thu Jun 14 2012 jason - 2.8.1-1
 - Initial package
