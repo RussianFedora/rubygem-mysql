@@ -47,7 +47,7 @@ This is a conversion of tmtm's original extension into a proper RubyGems.
 Summary: Documentation for %{name}
 Group: Documentation
 Requires: %{name} = %{version}-%{release}
-BuildArch: noarch
+#_mx BuildArch: noarch
 
 %description doc
 Documentation for %{name}
@@ -95,6 +95,7 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %changelog
 * Fri Jun 07 2013 Sergey Mihailov <sergey.mihailov@gmail.com> - 2.8.1-2
 - minor fix
+- disable noarch for package doc.
 
 * Thu Jun 14 2012 jason - 2.8.1-1
 - Initial package
